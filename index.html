@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact-Form</title>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- My Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400&family=Montserrat:wght@500&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,600&family=Pacifico&family=Poppins:wght@100;200;300;400;500;600;700&family=Raleway:ital,wght@0,300;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <!-- My Icons -->
+    <!-- My Icon (Boxicons CSS) -->
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <form name="contact-form">
+        <div class="info">
+          <p class="info-p"><strong>Terima kasih!</strong> Pesan anda terkirim</p>
+          <i class="bx bx-x"></i>
+        </div>
+        <h3>Contact Me</h3>
+        <p class="rules">berikan informasi secara teliti, agar kami dapat mudah memproses pesan mu!</p>
+        <div class="input-box">
+          <input type="text" name="name" required />
+          <label for="">Name</label>
+        </div>
+        <div class="input-box">
+          <input type="text" name="email" required />
+          <label for="">Email</label>
+        </div>
+        <div class="input-box">
+          <input type="text" name="phone" required />
+          <label for="">Phone</label>
+        </div>
+        <div class="input-box">
+          <input type="text" name="text" required />
+          <label for="">Message</label>
+        </div>
+        <button type="submit" class="btn-kirim">Send</button>
+        <div class="icons">
+          <i class="bx bxl-instagram"></i>
+          <i class="bx bxl-facebook"></i>
+          <i class="bx bxl-github"></i>
+          <i class="bx bxl-whatsapp"></i>
+        </div>
+      </form>
+    </div>
+
+    <footer>
+      <h4>About me</h4>
+      <p class="footer-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam aliquam quasi dignissimos maxime <br /></p>
+      <hr />
+      <div class="footer-bottom">
+        <p class="footer-info-1"><i class="bx bx-copyright"></i> All Rights Reserved 2022.</p>
+        <p class="footer-info-2">Designed by <span>Descx</span></p>
+      </div>
+    </footer>
+
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwNHytjHoZxcal5BQ4rcshtshLofhORZgFLQWBYXfBC3qSV6gmJ2ZdJj7Q8sV68rmPj/exec";
+      const form = document.forms["contact-form"];
+      const info = document.querySelector(".info"),
+        btnKirim = document.querySelector(".btn-kirim"),
+        icon = document.querySelector(".bx-x");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        btnKirim.innerHTML = "Loading...";
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            btnKirim.innerHTML = "Send";
+            info.style.display = "flex";
+            form.reset();
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+
+      icon.addEventListener("click", () => (info.style.display = "none"));
+    </script>
+  </body>
+</html>
